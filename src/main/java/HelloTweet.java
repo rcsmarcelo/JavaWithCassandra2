@@ -1,9 +1,6 @@
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
-import com.datastax.driver.core.Session;
+import com.datastax.driver.core.*;
 
-public class HelloWorld {
+public class HelloTweet {
     public static void main(String[] args) {
         System.out.println("Sup");
         Cluster cluster = null;
@@ -27,18 +24,20 @@ public class HelloWorld {
             tr.createTable();
             System.out.println("Creating table Tweets");
 
-            Tweet tweet = new Tweet("Jorgin", "coe lek", "02-02-19");
+            Tweet tweet = new Tweet("Jorgin", "coe lek",
+                    LocalDate.fromYearMonthDay(19,02,03));
             tr.insertTweet(tweet);
-            Tweet tweet2 = new Tweet("MrMan", "its lit", "02-03-19");
+            Tweet tweet2 = new Tweet("MrMan", "its lit",
+                    LocalDate.fromYearMonthDay(19,02,04));
             tr.insertTweet(tweet2);
             Tweet tweet3 = new Tweet("penguinman", "i like penguins",
-                    "02-02-19");
+                    LocalDate.fromYearMonthDay(19,02,03));
             tr.insertTweet(tweet3);
             Tweet tweet4 = new Tweet("MrMan", "it really is lit",
-                    "04-03-19");
+                    LocalDate.fromYearMonthDay(19,02,05));
             tr.insertTweet(tweet4);
             Tweet tweet5 = new Tweet("Jorgin", "fomeeeee",
-                    "02-03-19");
+                    LocalDate.fromYearMonthDay(19,02,06));
             tr.insertTweet(tweet5);
             System.out.println("Inserting tweets");
 

@@ -1,13 +1,15 @@
+import com.datastax.driver.core.LocalDate;
+
 import java.util.UUID;
 
 public class Tweet {
     private String Username;
     private String TweetText;
-    private String DateSent;
+    private LocalDate DateSent;
 
     public Tweet() {}
 
-    public Tweet(String username, String tttext, String date) {
+    public Tweet(String username, String tttext, LocalDate date) {
         Username = username;
         TweetText = tttext;
         DateSent = date;
@@ -17,11 +19,11 @@ public class Tweet {
 
     public void setTweetText(String tweetText) { this.TweetText = tweetText; }
 
-    public void setDateSent(String dateSent) { this.DateSent = dateSent; }
+    public void setDateSent(LocalDate dateSent) { this.DateSent = dateSent; }
 
     public String getUsername() { return Username; }
 
-    public String getDateSent() { return DateSent; }
+    public LocalDate getDateSent() { return DateSent; }
 
     public String getTweetText() { return TweetText; }
 

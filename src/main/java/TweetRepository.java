@@ -19,7 +19,7 @@ public class TweetRepository {
                 .append(TABLE_NAME).append("(")
                 .append("tweettext text PRIMARY KEY, ")
                 .append("username text,")
-                .append("datesent text);");
+                .append("datesent date);");
         final String query = sb.toString();
         session.execute(query);
     }
@@ -46,7 +46,7 @@ public class TweetRepository {
         List<Tweet> tweets = new ArrayList<Tweet>();
         for (Row r : rs) {
             Tweet tt = new Tweet(r.getString("username"),
-                    r.getString("tweettext"), r.getString("datesent"));
+                    r.getString("tweettext"), r.getDate("datesent"));
             System.out.println("@" + tt.getUsername() + ":" + " " + tt.getTweetText());
             tweets.add(tt);
         }
