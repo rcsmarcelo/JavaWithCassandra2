@@ -2,7 +2,6 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.utils.UUIDs;
 
 public class HelloWorld {
     public static void main(String[] args) {
@@ -18,39 +17,42 @@ public class HelloWorld {
             System.out.println(row.getString("release_version"));
 
             KeyspaceRepository sr = new KeyspaceRepository(session);
-            sr.createKeyspace("library", "SimpleStrategy", 1);
-            System.out.println("Create Repository");
+            sr.createKeyspace("tweets", "SimpleStrategy", 1);
+            System.out.println("Creating Repository");
 
-            sr.useKeyspace("library");
-            System.out.println("Using repository library");
+            sr.useKeyspace("tweets");
+            System.out.println("Using repository tweets");
 
-            BookRepository br = new BookRepository(session);
-            br.createTable();
-            System.out.println("Create table book");
+            TweetRepository tr = new TweetRepository(session);
+            tr.createTable();
+            System.out.println("Creating table Tweets");
 
-            br.alterTableBooks("publisher", "text");
-            System.out.println("Alter table book");
+            Tweet tweet = new Tweet("Jorgin", "coe lek", "02-02-19");
+            tr.insertTweet(tweet);
+            Tweet tweet2 = new Tweet("MrMan", "its lit", "02-03-19");
+            tr.insertTweet(tweet2);
+            Tweet tweet3 = new Tweet("penguinman", "i like penguins",
+                    "02-02-19");
+            tr.insertTweet(tweet3);
+            Tweet tweet4 = new Tweet("MrMan", "it really is lit",
+                    "04-03-19");
+            tr.insertTweet(tweet4);
+            Tweet tweet5 = new Tweet("Jorgin", "fomeeeee",
+                    "02-03-19");
+            tr.insertTweet(tweet5);
+            System.out.println("Inserting tweets");
 
-            br.createTableBooksByTitle();
-            System.out.println("Create table book - step 2");
+            tr.selectAll();
+            System.out.println("Fecthing all tweets");
 
-            Book book = new Book(UUIDs.timeBased(), "Effective Java 1", "Joshua Bloch a",
-                    "Programming 1");
-            br.insertBook(book);
-            Book book2 = new Book(UUIDs.timeBased(), "Effective Java 2", "Joshua Bloch a",
-                    "Programming 2");
-            br.insertBook(book2);
-            System.out.println("Insert books");
+            tr.deleteTweet("its lit");
+            System.out.println("Deleting tweet \"its lit\"");
 
-            br.selectAll();
+            tr.deleteTable("Tweets");
+            System.out.println("Deleting table Tweets");
 
-            br.deleteBookByTitle("Effective Java");
-            br.deleteTable("books");
-            br.deleteTable("booksByTitle");
-            System.out.println("Delete books");
-
-            sr.deleteKeyspace("library");
-            System.out.println("Delete keyspace library");
+            sr.deleteKeyspace("tweets");
+            System.out.println("Deleting keyspace tweets");
 
         } finally {
             if (cluster != null) cluster.close();
