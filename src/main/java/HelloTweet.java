@@ -1,4 +1,6 @@
 import com.datastax.driver.core.*;
+import com.datastax.driver.core.utils.UUIDs;
+import twitter4j.GeoLocation;
 
 public class HelloTweet {
     public static void main(String[] args) {
@@ -24,28 +26,48 @@ public class HelloTweet {
             tr.createTable();
             System.out.println("Creating table Tweets");
 
-            Tweet tweet = new Tweet("Jorgin", "coe lek",
-                    LocalDate.fromYearMonthDay(19,02,03));
+            tr.createTableTweetsByCountry();
+            System.out.println("Creating table TweetsByUser");
+
+            Tweet tweet = new Tweet(UUIDs.timeBased(),"Jorgin", "coe lek",
+                    LocalDate.fromYearMonthDay(19,02,03),"EUA", "lol", false,
+                    new GeoLocation(10, 10), true, true, null);
             tr.insertTweet(tweet);
-            Tweet tweet2 = new Tweet("MrMan", "its lit",
-                    LocalDate.fromYearMonthDay(19,02,04));
+            Tweet tweet2 = new Tweet(UUIDs.timeBased(),"MrMan", "its lit",
+                    LocalDate.fromYearMonthDay(19,02,04),"EUA", "lol", false,
+                    new GeoLocation(10, 10), true, true, null);
             tr.insertTweet(tweet2);
-            Tweet tweet3 = new Tweet("penguinman", "i like penguins",
-                    LocalDate.fromYearMonthDay(19,02,03));
+            Tweet tweet3 = new Tweet(UUIDs.timeBased(),"penguinman", "i like penguins",
+                    LocalDate.fromYearMonthDay(19,02,03),"EUA", "lol", false,
+                    new GeoLocation(10, 10), true, true, null);
             tr.insertTweet(tweet3);
-            Tweet tweet4 = new Tweet("MrMan", "it really is lit",
-                    LocalDate.fromYearMonthDay(19,02,05));
+            Tweet tweet4 = new Tweet(UUIDs.timeBased(),"MrMan", "it really is lit",
+                    LocalDate.fromYearMonthDay(19,02,05),"EUA", "lol", false,
+                    new GeoLocation(10, 10), true, true, null);
             tr.insertTweet(tweet4);
-            Tweet tweet5 = new Tweet("Jorgin", "fomeeeee",
-                    LocalDate.fromYearMonthDay(19,02,06));
-            tr.insertTweet(tweet5);
-            System.out.println("Inserting tweets");
+            Tweet tweet5 = new Tweet(UUIDs.timeBased(),"Jorgin", "fomeeeee",
+                    LocalDate.fromYearMonthDay(19,02,06),"EUA", "lol", false,
+                    new GeoLocation(10, 10), true, true, null);
+
+            tr.insertTweetByCountry(tweet5);
+            tr.insertTweetByCountry(tweet);
+            tr.insertTweetByCountry(tweet2);
+            tr.insertTweetByCountry(tweet3);
+            tr.insertTweetByCountry(tweet4);
+            tr.insertTweetByCountry(tweet5);
+            System.out.println("Inserting tweets by country");
 
             tr.selectAll();
             System.out.println("Fecthing all tweets");
 
-            tr.deleteTweet("its lit");
-            System.out.println("Deleting tweet \"its lit\"");
+            tr.selectAllByCountry();
+            System.out.println("Fecthing all tweets by country");
+
+            tr.selectTweetByCountry("EUA");
+            System.out.println("Fecthing tweets from country X");
+
+            //tr.deleteTweet("its lit");
+            //System.out.println("Deleting tweet \"its lit\"");
 
             tr.deleteTable("Tweets");
             System.out.println("Deleting table Tweets");
