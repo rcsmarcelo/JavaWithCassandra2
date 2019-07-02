@@ -136,7 +136,7 @@ public class TweetRepository {
                     r.getString("tweettext"), r.getDate("datesent"), r.getString("country"),
                     r.getString("source"), r.getBool("istruncated"), geo,
                     r.getBool("isfavorited"), r.getBool("isretweeted"), null);
-            System.out.println("@" + tt.getUsername() + ":" + " " + tt.getTweetText());
+            System.out.println(tt.getCountry() + "  " + tt.getID() + " @" + tt.getUsername() + ":" + " " + tt.getTweetText());
             tweets.add(tt);
         }
         System.out.println("selectAll – end");
@@ -158,7 +158,7 @@ public class TweetRepository {
                     r.getString("tweettext"), r.getDate("datesent"), r.getString("country"),
                     r.getString("source"), r.getBool("istruncated"), geo,
                     r.getBool("isfavorited"), r.getBool("isretweeted"), null);
-            System.out.println("@" + tt.getUsername() + ":" + " " + tt.getTweetText());
+            System.out.println(tt.getCountry() + "  " + tt.getID() + " @" + tt.getUsername() + ":" + " " + tt.getTweetText());
             tweets.add(tt);
         }
         System.out.println("selectAllyCountry – end");
@@ -181,7 +181,7 @@ public class TweetRepository {
                     r.getString("tweettext"), r.getDate("datesent"), r.getString("country"),
                     r.getString("source"), r.getBool("istruncated"), geo,
                     r.getBool("isfavorited"), r.getBool("isretweeted"), null);
-            System.out.println("@" + tt.getUsername() + ":" + " " + tt.getTweetText());
+            System.out.println(tt.getCountry() + "  " + tt.getID() + " @" + tt.getUsername() + ":" + " " + tt.getTweetText());
             tweets.add(tt);
         }
         System.out.println("selectTweetByCountry – end");

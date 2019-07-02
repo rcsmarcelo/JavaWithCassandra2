@@ -30,7 +30,7 @@ public class HelloTweet {
             System.out.println("Creating table TweetsByUser...\n");
 
             Tweet tweet = new Tweet(UUIDs.timeBased(),"Jorgin", "coe lek",
-                    LocalDate.fromYearMonthDay(19,02,03),"EUA", "lol", false,
+                    LocalDate.fromYearMonthDay(19,02,03),"Brazil", "lol", false,
                     new GeoLocation(10, 10), true, true, null);
             tr.insertTweet(tweet);
             Tweet tweet2 = new Tweet(UUIDs.timeBased(),"MrMan", "its lit",
@@ -46,7 +46,7 @@ public class HelloTweet {
                     new GeoLocation(10, 10), true, true, null);
             tr.insertTweet(tweet4);
             Tweet tweet5 = new Tweet(UUIDs.timeBased(),"Jorgin", "fomeeeee",
-                    LocalDate.fromYearMonthDay(19,02,06),"EUA", "lol", false,
+                    LocalDate.fromYearMonthDay(19,02,06),"Brazil", "lol", false,
                     new GeoLocation(10, 10), true, true, null);
             tr.insertTweet(tweet5);
 
@@ -68,10 +68,10 @@ public class HelloTweet {
             System.out.println("Fecthing tweets from country X\n");
 
             tr.deleteTweet(tweet3.getID());
-            System.out.println("Deleting tweet \"its lit\"\n");
+            System.out.println("Deleting tweet " + tweet3.getID() + " \n");
 
             tr.deleteTweetByCountry("EUA", tweet3.getID());
-            System.out.println("Deleting tweets from \"EUA\"\n");
+            System.out.println("Deleting tweet " + tweet3.getID() + " from \"EUA\"\n");
 
             tr.selectAll();
             System.out.println("Fecthing all tweets\n");
