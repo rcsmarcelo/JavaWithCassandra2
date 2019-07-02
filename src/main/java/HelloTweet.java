@@ -17,17 +17,17 @@ public class HelloTweet {
 
             KeyspaceRepository sr = new KeyspaceRepository(session);
             sr.createKeyspace("tweets", "SimpleStrategy", 1);
-            System.out.println("Creating Repository");
+            System.out.println("Creating Repository...\n");
 
             sr.useKeyspace("tweets");
-            System.out.println("Using repository tweets");
+            System.out.println("Using repository tweets...\n");
 
             TweetRepository tr = new TweetRepository(session);
             tr.createTable();
-            System.out.println("Creating table Tweets");
+            System.out.println("Creating table Tweets...\n");
 
             tr.createTableTweetsByCountry();
-            System.out.println("Creating table TweetsByUser");
+            System.out.println("Creating table TweetsByUser...\n");
 
             Tweet tweet = new Tweet(UUIDs.timeBased(),"Jorgin", "coe lek",
                     LocalDate.fromYearMonthDay(19,02,03),"EUA", "lol", false,
@@ -48,6 +48,7 @@ public class HelloTweet {
             Tweet tweet5 = new Tweet(UUIDs.timeBased(),"Jorgin", "fomeeeee",
                     LocalDate.fromYearMonthDay(19,02,06),"EUA", "lol", false,
                     new GeoLocation(10, 10), true, true, null);
+            tr.insertTweet(tweet5);
 
             tr.insertTweetByCountry(tweet5);
             tr.insertTweetByCountry(tweet);
@@ -55,25 +56,37 @@ public class HelloTweet {
             tr.insertTweetByCountry(tweet3);
             tr.insertTweetByCountry(tweet4);
             tr.insertTweetByCountry(tweet5);
-            System.out.println("Inserting tweets by country");
+            System.out.println("Inserting tweets by country\n");
 
             tr.selectAll();
-            System.out.println("Fecthing all tweets");
+            System.out.println("Fecthing all tweets\n");
 
             tr.selectAllByCountry();
-            System.out.println("Fecthing all tweets by country");
+            System.out.println("Fecthing all tweets by country\n");
 
             tr.selectTweetByCountry("EUA");
-            System.out.println("Fecthing tweets from country X");
+            System.out.println("Fecthing tweets from country X\n");
 
-            //tr.deleteTweet("its lit");
-            //System.out.println("Deleting tweet \"its lit\"");
+            tr.deleteTweet(tweet3.getID());
+            System.out.println("Deleting tweet \"its lit\"\n");
+
+            tr.deleteTweetByCountry("EUA", tweet3.getID());
+            System.out.println("Deleting tweets from \"EUA\"\n");
+
+            tr.selectAll();
+            System.out.println("Fecthing all tweets\n");
+
+            tr.selectAllByCountry();
+            System.out.println("Fecthing all tweets by country\n");
 
             tr.deleteTable("Tweets");
-            System.out.println("Deleting table Tweets");
+            System.out.println("Deleting table Tweets\n");
+
+            tr.deleteTable("TweetsByCountry");
+            System.out.println("Deleting table TweetsByCountry\n");
 
             sr.deleteKeyspace("tweets");
-            System.out.println("Deleting keyspace tweets");
+            System.out.println("Deleting keyspace tweets\n");
 
         } finally {
             if (cluster != null) cluster.close();
